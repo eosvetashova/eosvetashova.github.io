@@ -12,6 +12,19 @@
     <link rel="shortcut icon" type="image/png" href="//i.siteapi.org/iuvukIKwoGVQmdqshCbF1UmBuDw=/16x16/27dc0a732b1b440.s2.siteapi.org/favicon/a1v36mknj484ocs08cogkso4o0wso4" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <style>
+      /* The sticky class is added to the navbar with JS when it reaches its scroll position */
+      .sticky {
+        position: fixed;
+        top: 0;
+        width: 100%;
+      }
+
+      /* Add some top padding to the page content to prevent sudden quick movement (as the navigation bar gets a new position at the top of the page (position:fixed and top:0) */
+      .sticky ~ #main {
+        padding-top: 110px;
+      }
+    </style>
   <link href="assets/css/app.css" rel="stylesheet"></head>
 
   <body>
@@ -42,11 +55,29 @@
 
       <script>
         function myFunction() {
-          var x = document.getElementById("myTopnav");
-          if (x.className === "topnav") {
-            x.className += " responsive";
+          var myTopnav = document.getElementById("myTopnav");
+          if (myTopnav.className === "topnav") {
+            myTopnav.className += " responsive";
           } else {
-            x.className = "topnav";
+            myTopnav.className = "topnav";
+          }
+        }
+
+        // window.onscroll = function() {
+        //   // functionSticky();
+        //   console.log(window.pageYOffset);
+        // };
+
+        window.addEventListener("scroll", functionSticky);
+
+        // var navbar = document.getElementById("navbar");
+        var sticky = myTopnav.offsetTop;
+
+        function functionSticky() {
+          if (window.pageYOffset >= sticky) {
+            myTopnav.classList.add("sticky");
+          } else {
+            myTopnav.classList.remove("sticky");
           }
         }
       </script>
